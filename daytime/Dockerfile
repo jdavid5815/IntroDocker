@@ -17,6 +17,8 @@ RUN make && make strip
 # The Server
 FROM alpine:3.7 as server
 
+LABEL maintainer="jan.david@evolane.be"
+
 RUN mkdir /app
 
 WORKDIR /app
