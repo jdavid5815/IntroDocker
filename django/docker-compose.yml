@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+
+  db:
+    image: postgres:10.1
+
+  web:
+    image: jdavid5815/django-demo:1.0
+    working_dir: /app/mysite
+    volumes:
+      - /Users/jdavid/IntroDocker/django/app:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: python3 manage.py runserver 0.0.0.0:8000

@@ -1,3 +1,6 @@
+Application 1:
+--------------
+
 docker build --target builder -t daytime:build_1.0 .
 
 docker build --target server -t daytime:1.0 .
@@ -7,3 +10,27 @@ docker run -it --rm --name daytime -p 13:13 daytime:1.0
 javac Daytime.java
 
 java Daytime
+
+
+Application 2:
+--------------
+
+docker build -t django:build_1.0 .
+
+docker tag django:build_1.0 jdavid5815/django-demo:1.0
+
+docker push jdavid5815/django-demo:1.0
+
+docker run -it --rm -v /Users/jdavid/IntroDocker/django/app:/app django:build_1.0 django-admin startproject mysite
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
+}
+
+docker-compose up
