@@ -3,7 +3,11 @@ version: "3.4"
 services:
 
   db:
-    image: postgres:10.1
+    image: postgres:10.2
+    environment:
+      POSTGRES_DB: "webdb"
+      POSTGRES_USER: "db_user"
+      POSTGRES_PASSWORD: "fH98GvSx6vaLGttRTbnLdGhe"
 
   web:
     image: jdavid5815/django-demo:1.0
