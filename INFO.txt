@@ -26,8 +26,9 @@ docker run -it --rm -v /Users/jdavid/IntroDocker/django/app:/app django:build_1.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
+        'NAME': 'webdb',
+        'USER': 'db_user',
+        'PASSWORD': 'fH98GvSx6vaLGttRTbnLdGhe',
         'HOST': 'db',
         'PORT': 5432,
     }
