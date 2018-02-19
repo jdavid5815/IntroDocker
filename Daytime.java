@@ -11,7 +11,7 @@ public class Daytime {
   public static void main(String[] args) {
 
     try {
-      Daytime d = new Daytime("10.1.47.20");
+      Daytime d = new Daytime("172.18.116.184");
       System.out.println(d.getTime());
     }
     catch (IOException ex) {

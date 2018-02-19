@@ -1,0 +1,60 @@
+version: "3.4"
+
+services:
+
+  mariadb:
+    image: mariadb:10.3.4
+    networks:
+      - dbnet
+    ports:
+      - "3306"
+    stop_grace_period: 30s
+    environment:
+      MYSQL_ROOT_PASSWORD: "hCftHXMy8ED7dKBUhFPbUCkA"
+      MYSQL_DATABASE: "web"
+      MYSQL_USER: "webuser"
+      MYSQL_PASSWORD: "HUCtTVGd2qPnAHYTZc9zTKgJ"
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: on-failure
+
+  pma:
+    image: phpmyadmin/phpmyadmin:4.7
+    networks:
+      - dbnet
+    ports:
+      - "8080:80"
+    stop_grace_period: 10s
+    environment:
+      PMA_ABSOLUTE_URI: "http://localhost"
+      PMA_ARBITRARY: 1
+    volumes:
+      - type: volume
+        source: sessions
+        target: /sessions
+        volume:
+          nocopy: true
+    restart: on-failure
+    depends_on:
+      - mariadb
+
+  web:
+    image: httpd:1.0
+    networks:
+      - dbnet
+    ports:
+      - "80:80"
+    stop_grace_period: 10s
+    volumes:
+      - /Users/jdavid/IntroDocker/Lamp:/var/www/html
+    restart: on-failure
+
+networks:
+  dbnet:
+    external: true
+
+volumes:
+  mariadb:
+    external: true
+  sessions:
+    external: true
